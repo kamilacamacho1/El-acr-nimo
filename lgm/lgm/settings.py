@@ -12,8 +12,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -84,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'l_p+!n856ix^@070gnf19^ep&6f0n&2=fvmd05b$(wh1k(g!z+'
+SECRET_KEY = '37lu#plw^%7_l6o$8^2=o*^75$*3f0uy629nvfc(p2#ey!zc)_'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -122,11 +122,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lgm.apps.home',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
+    'lgm.apps.home',
+    'lgm.apps.reportes',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
