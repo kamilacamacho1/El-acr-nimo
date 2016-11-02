@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+	<title>lgm</title>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="/media/materialize/css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="/media/materialize/css/materailize.min.css">
+</head>
+
+<body>
+	    
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <header>
+	    <nav>
+   			<div class="nav-wrapper   blue lighten-1">
+      			<a href="#" class="brand-logo">Logo</a>
+      			<ul id="nav-mobile" class="right hide-on-med-and-down">
+			        <li><a href="{% url 'vista_principal' %}">Home</a></li>
+			        <li><a href="{% url 'vista_tanita' %}">Tanita</a></li>
+			        <li><a href="{% url 'vista_registro' %}">Registro</a></li>
+			        	{% if user.is_authenticated %}
+							<li><a href="{% url 'vista_logout' %}"> Cerrar Sesion
+						{% else %}
+						</li></a>
+					 <li><a href="{% url 'vista_login' %}">Login</a></li>
+					 {% endif %}
+	      			</li></a>	
+      			</ul>
+    		</div>
+  		</nav>
+  		</header>
+    <div class = "hero-unit">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
