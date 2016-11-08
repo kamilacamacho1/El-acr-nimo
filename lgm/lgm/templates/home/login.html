@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+	
+	<form action="." method="POST" align="center">
+		{% csrf_token %}
+		{{mensage}}
+		{{form.as_p}}
+		<button type="submit" a class="waves-effect blue lighten-1 btn-large" type="submit"  value="Login">Login
+		</button></a>
+	</form>
+	<br>
+	<form align = "center">
+		<a href="/registro/"  class="waves-effect blue lighten-1 btn-large">Registrar</a></span>
+		
+	</form>
+	
+
+{% endblock %}
