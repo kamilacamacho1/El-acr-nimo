@@ -2,11 +2,6 @@ from lgm.apps.home.models import *
 from django import forms
 from django.contrib.auth.models import User
 
-class add_Clase_form (forms.ModelForm):
-	class Meta:
-		model = Clase
-
-
 class Login_form(forms.Form):
 	usuario = forms.CharField(widget = forms.TextInput())
 	clave   = forms.CharField(widget = forms.PasswordInput(render_value = False))
@@ -40,4 +35,9 @@ class RegisterForm(forms.Form):
 			pass
 		else:
 			raise forms.ValidationError('Password no coinciden')
+
+class contact_form(forms.Form):
+	correo = forms.EmailField(widget = forms.TextInput())
+	asunto = forms.CharField(widget = forms.TextInput())
+	comentario = forms.CharField(widget = forms.Textarea())
 

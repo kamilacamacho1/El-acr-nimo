@@ -1,58 +1,33 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
-class user_profile(models.Model):
-	
-	def url(self, filename):
-		ruta = "MultimediaData/User/%s/%s"%(self.user.username,filename)
-		return ruta
-
-	user 		=	models.OneToOneField(User)
-	photo 		=	models.ImageField(upload_to=url)
-	telefono 	=	models.CharField(max_length=30)
-
-	def __unicode__(self):
-		return self.user.username
-
-
-class Clase(models.Model):
+''' Enfermedades '''
+class Tipo_Enfermedad(models.Model):
 	nombre = models.CharField(max_length = 100)
-	codigo = models.CharField(max_length = 100)
 
 	def __unicode__ (self):
 		return self.nombre
+
+	class Meta:
+		verbose_name_plural = "Tipo_Enfemedad"
+
 
 class Enfermedad(models.Model):
 	nombre = models.CharField(max_length = 100)
-	origen = models.TextField(max_length = 500)
-	curso  = models.CharField(max_length = 100)
-	frecuencia = models.CharField(max_length =100)
-	clase = models.ForeignKey(Clase)
+	#codigo = models.CharField(max_length = 100)
+	#origen = models.TextField(max_length = 500)
+	#curso  = models.CharField(max_length = 100)
+	frecuencia = models.CharField(max_length =100) #periocidad
+	tipo = models.ForeignKey(Tipo_Enfermedad)
 
 	def __unicode__ (self):
 		return self.nombre
 
+	class Meta:
+		verbose_name_plural = "Enfermedad"
 	
-
-class Ejercicio(models.Model):
-	nombre = models.CharField(max_length = 100)
-	tiempo = models.DateTimeField(auto_now_add = True)
-	series = models.CharField(max_length = 100)
-
-	def __unicode__ (self):
-		return self.nombre	
-
-
-class Rutina(models.Model):
-	nombre        = models.CharField(max_length = 100)
-	clasificacion = models.CharField(max_length = 100)
-	fechahora     =  models.DateTimeField(auto_now_add = True)
-	ejercicio      = models.ManyToManyField(Ejercicio, null = True, blank= True)
-
-	def __unicode__ (self):
-		return self.nombre
-
+''' Fin Enfermedades '''
+                               
 
 class Producto(models.Model):
 	def url(self, filename):
@@ -62,17 +37,47 @@ class Producto(models.Model):
 	nombre      = models.CharField(max_length = 100)
 	precio      = models.CharField(max_length = 100)
 	descripcion = models.TextField(max_length=100)
-	stock       = models.IntegerField()
+	#stock       = models.IntegerField()
 	imagen     = models.ImageField(upload_to = url, null = True, blank = True)
+
 
 	def __unicode__ (self):
 		return self.nombre
 
+	class Meta:
+		verbose_name_plural = "Producto"
+	
+RECOMENDADO = (
+	('si','si'), 
+	('no','no'), 
+)
 
+class Producto_Enfermedad(models.Model):
+	pro       	= models.ForeignKey(Producto, unique = True)
+	enf        	= models.ForeignKey(Enfermedad)#, unique = True)
+	recomendable= models.CharField(max_length = 50, choices = RECOMENDADO )
 
+	
+	def __unicode__ (self):
+		return self.pro.nombre + " "  + self.enf.nombre + " "  + self.recomendable
+
+	class Meta:
+		verbose_name_plural = "Producto_Enfermedad"
+
+HORARIOS=(
+	("Desayuno","Desayuno"),
+	("Merienda","Merienda"),
+	("Almuerzo","Almuerzo"),
+	("Media Tarde","Media Tarde"),
+	("Cena","Cena"),
+	
+	
+
+)		
+	
 class Dieta(models.Model):
 	clasificacion= models.CharField(max_length = 100)
-	horario      = models.CharField(max_length = 100)
+	horario      = models.CharField(max_length = 100, choices = HORARIOS )
 	suplementos  = models.TextField(max_length=100)
 	porciones    = models.CharField(max_length=100)
 	producto     = models.ManyToManyField(Producto, null= True, blank = True)
@@ -80,32 +85,52 @@ class Dieta(models.Model):
  	def __unicode__ (self):
 		return self.clasificacion
 
+	class Meta:
+		verbose_name_plural = "Dieta"
+
+GENEROS =(
+	('Hombre','Hombre'),
+	('Mujer','Mujer'),
+
+)
+	
+
+class Persona (models.Model):
+	def url(self, filename):
+		ruta = "MultimediaData/User/%s/%s"%(self.user.username,filename)
+		return ruta
+	foto 			 =	models.ImageField(upload_to=url)
+	genero           = models.CharField(max_length=50, choices = GENEROS)
+	fecha_nacimiento = models.DateField()
+	enfermedad       = models.ManyToManyField(Enfermedad, null= True, blank =True)
+	user             = models.ForeignKey(User)
+
+	def __unicode__ (self):
+		return self.genero
+
+	class Meta:
+		verbose_name_plural = "Persona"
+
+
 
 class Valoracion(models.Model):
-	masamuscular  = models.CharField(max_length = 100)
-	fechahora     = models.DateTimeField(max_length = 100)
-	peso          = models.CharField(max_length=100)
-	grasaviceral  = models.CharField(max_length=100)
-	grasacorporal = models.CharField(max_length=100)
-	pagua         = models.CharField(max_length=100)
-	masaosea      = models.CharField(max_length=100)
-	edadmetabolica= models.CharField(max_length=100)
-	bmr           = models.CharField(max_length=100)
+	masamuscular    = models.CharField(max_length = 100)
+	fecha_hora      = models.DateTimeField(auto_now_add = True)
+	peso            = models.CharField(max_length=100)
+	grasa_viceral   = models.CharField(max_length=100)
+	grasa_corporal  = models.CharField(max_length=100)
+	pagua           = models.CharField(max_length=100)
+	masaosea        = models.CharField(max_length=100)
+	edad_metabolica = models.CharField(max_length=100)
+	bmr             = models.CharField(max_length=100)
+	persona         = models.OneToOneField(Persona)
+	
 
 	def __unicode__ (self):
 		return self.masamuscular
 
-
-class Persona (models.Model):
-	nombre          = models.CharField(max_length = 100)
-	apellidos       = models.CharField(max_length = 100)
-	genero          = models.TextField(max_length=100)
-	documento       = models.CharField(max_length=100)
-	fechanacimiento = models.CharField(max_length=100)
-	enfermedad      = models.ManyToManyField(Enfermedad, null= True, blank =True)
-	user            = models.ForeignKey(User)
-
-	def __unicode__ (self):
-		return self.nombre
+	class Meta:
+		verbose_name_plural = "Valoracion"
+	
 
 

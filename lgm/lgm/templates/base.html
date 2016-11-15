@@ -3,13 +3,25 @@
 <head>
 
 	<title>lgm</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">      
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="/media/materialize/css/materialize.css">
-	<link rel="stylesheet" type="text/css" href="/media/materialize/css/materailize.min.css">
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>   
+ <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  
+
+<!--link href="media/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/-->
+      
+  	  <link href="media/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
+
+
+  	  <script type="text/javascript" src="media/js/slider.js"></script>
+
 </head>
 
 <body>
@@ -21,6 +33,7 @@
       			<a href="#" class="brand-logo">Logo</a>
       			<ul id="nav-mobile" class="right hide-on-med-and-down">
 			        <li><a href="{% url 'vista_principal' %}">Home</a></li>
+			        <li><a href="{% url 'vista_about' %}">Quienes Somos</a></li>
 			        <li><a href="{% url 'vista_tanita' %}">Tanita</a></li>
 			        <li><a href="{% url 'vista_registro' %}">Registro</a></li>
 			        	{% if user.is_authenticated %}
@@ -29,7 +42,8 @@
 						</li></a>
 					 <li><a href="{% url 'vista_login' %}">Login</a></li>
 					 {% endif %}
-	      			</li></a>	
+	      			</li></a>
+	      			<li><a href="{% url 'vista_contact' %}">Contacto</a></li>	
       			</ul>
     		</div>
   		</nav>
@@ -39,10 +53,10 @@
 		{% endblock %}
 	</div>
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+
+    <script src="media/js/bootstrap.min.js"></script-->
 </body>
 </html>
 
