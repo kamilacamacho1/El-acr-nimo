@@ -68,6 +68,8 @@ def login_view (request):
 					return HttpResponseRedirect('/')
 				else:
 					mensage = "usuario y/o clave incorrecta"
+			else:
+				mensage = "Campos obligatorios"
 		formulario = Login_form()
 		ctx = {'form':formulario, 'mensage':mensage}
 		return render_to_response('home/login.html',ctx,context_instance = RequestContext(request))

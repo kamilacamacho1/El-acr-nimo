@@ -2,9 +2,17 @@ from lgm.apps.home.models import *
 from django import forms
 from django.contrib.auth.models import User
 
+class add_Clase_form (forms.ModelForm):
+	class Meta:
+		model = Clase
+
+
 class Login_form(forms.Form):
 	usuario = forms.CharField(widget = forms.TextInput())
 	clave   = forms.CharField(widget = forms.PasswordInput(render_value = False))
+
+
+
 
 class RegisterForm(forms.Form):
 	username	= forms.CharField(label="Nombre de Usuario" ,widget=forms.TextInput())
