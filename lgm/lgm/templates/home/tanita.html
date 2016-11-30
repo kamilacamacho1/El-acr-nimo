@@ -1,133 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
+{% block title %} Taringa {% endblock %}
 {% block content %}
-<html lang="es">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>Lgm</title>
-
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="/media/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="/media/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-
-  <!--  Scripts-->
-  <script src="/media/js/jquery-2.1.1.min.js"></script>
-  <script src="/media/js/materialize.js"></script>
-  <script src="/media/js/init.js"></script>
-</head>
-
-<body>
-  <div class="row">
-    <center>
-      <h2 class="section-heading">Tu Composición Corporal</h2>
-      <h3 class="section-subheading text-muted">Comencemos</h3>
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="nombre" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su nombre.">
-            <p class="help-block text-danger"></p>
-            <label for="nombre">Nombre</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="fecha" type="text" class="validate" required data-validation-required-message="Porfavor ingrese la fecha.">
-            <p class="help-block text-danger"></p>
-            <label for="fecha">Fecha</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <center>
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s6">
-                  <input id="edad" type="text" class="validate"  required data-validation-required-message="Porfavor ingrese su edad.">
-                  <p class="help-block text-danger"></p>
-                  <label for="edad">Edad</label>
-                </div>
-                <div class="input-field col s6">
-                  <input id="genero" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su genero.">
-                  <p class="help-block text-danger"></p>
-                  <label for="genero">Genero</label>
-                </div>
-              </div>
-
-              <div class="row">
-                <center>
-                  <form class="col s12">
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <input id="est" type="number" class="validate" required data-validation-required-message="Porfavor ingrese su estatura.">
-                        <p class="help-block text-danger"></p>
-                        <label for="est">Estatura</label>
-                      </div>
-                      <div class="input-field col s6">
-                        <input id="peso" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su peso.">
-                        <p class="help-block text-danger"></p>
-                        <label for="peso">Peso</label>
-                      </div>
-                    </div>
-                  </div>
 
 
+<center>
+  <div class="container">
+    <div class="col s6">
+      <form action="." method = "POST" align="center">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" a class="waves-effect blue lighten-1 btn-large" ><i class="material-icons left"> 
+          border_color</i>Registrar 
+        </button></a>
+      </form>
+    </div>
+  </div>
 
 
-
-                  <div class="row">
-                    <center>
-                      <form class="col s12">
-                        <div class="row">
-                          <div class="input-field col s6">
-                            <input id="gc" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su grasa corporal.">
-                            <p class="help-block text-danger"></p>
-                            <label for="gc">Grasa Corporal</label>
-                          </div>
-                          <div class="input-field col s6">
-                            <input id="ac" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su agua corporal.">
-                            <p class="help-block text-danger"></p>
-                            <label for="ac">Agua Corporal</label>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <center>
-                            <form class="col s12">
-                              <div class="row">
-                                <div class="input-field col s6">
-                                  <input id="gv" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su grasa visceral.">
-                                  <p class="help-block text-danger"></p>
-                                  <label for="gv">Grasa Visceral</label>
-                                </div>
-                                <div class="input-field col s6">
-                                  <input id="mo" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su masa osea.">
-                                  <p class="help-block text-danger"></p>
-                                  <label for="mo">Masa Osea</label>
-                                </div>
-                              </div>
-
-                              <div class="row">
-                                <center>
-                                  <form class="col s12">
-                                    <div class="row">
-                                      <div class="input-field col s6">
-                                        <input id="mm" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su masa muscural.">
-                                        <p class="help-block text-danger"></p>
-                                        <label for="mm">Masa Muscular</label>
-                                      </div>
-                                      <div class="input-field col s6">
-
-                                        <input id="em" type="text" class="validate" required data-validation-required-message="Porfavor ingrese su edad metabolica.">
-                                        <p class="help-block text-danger"></p>
-                                        <label for="em">Edad Metabolica</label>
-                                      </div>
-                                    </div>
-                                  </div>
-
-
-                                  <div class="clearfix"></div>
-                                  <div class="col-lg-12 text-center">
-                                    <div id="success"></div>
-                                    <button type="submit" a class="waves-effect  green darken-2 btn-large">Chequear </button></a>
-                                  </div>
-                                  {% endblock %}
+  {% endblock %}

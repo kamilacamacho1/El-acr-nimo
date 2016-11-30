@@ -1,54 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>lgm</title>
+	<title>emove</title>
+
 	<!--Importar materialize.css-->
 	<link type="text/css" rel="stylesheet" src="/media/materialize/css/materialize.min.css" media="screen,projection">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="media/css/materialize.min.css">
-	<!-- Compiled and minified JavaScript -->
-	
-	<!--link href="media/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/-->
-	<link href="/media/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	
-    <!--Importar jQuery antes que materialize.js-->   
-    <script type="text/javascript" src="/media/js/jquery-2.1.1.min.js"></script> 
-	<script type="text/javascript" sc="/media/js/materialize.min.js"></script>
-	<script src="/media/js/materialize.min.js"></script>
+	<link rel="stylesheet" href="/media/materialize/css/materialize.min.css">
+
+	<!--Importar jQuery antes que materialize.js-->   
+	<script src="/media/materialize/js/materialize.min.js"></script>
+
 	<!--script type="text/javascript" src="media/js/parallax.js"></script-->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+
+	<!-- CSS  -->
+	<link href="/media/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="/media/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+	<!--  Scripts-->
+	<script src="/media/materialize/js/materialize.js"></script>
+	<script src="/media/materialize/js/init.js"></script>
+
+	<!--Camila-->
+	<script src="{{ MEDIA_URL }}js/materialize.min.js"></script>
+	<link rel="stylesheet" href="{{ MEDIA_URL }}css/estilo.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWoDGHQ7W4NuQg0C_w6IIie-g-pHqz_qc"
+	type="text/javascript"></script>
+	<script src="{{ MEDIA_URL }}js/scripts.js"></script>
+
 
 </head>
 
 <body>
+	    
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <header>
+	    <nav>
+   			<div class="nav-wrapper  green darken-2">
+      			<a href="#" class="brand-logo">Logo</a>
+      			<ul id="nav-mobile" class="right hide-on-med-and-down">
+			        <li><a href="{% url 'vista_principal' %}">Home</a></li>
+			        <li><a href="{% url 'vista_nutricion' %}">Nutricion Sugerida</a></li>
+			        <li><a href="{% url 'vista_registro' %}">Registro</a></li>
+			        <li><a href="{% url 'vista_mapa1' %}">Sitios de Interes</a></li>
+			        	{% if user.is_authenticated %}
+			        		<li><a href="{% url 'vista_reporte' %}">Reporte</a></li>
+			        		<li><a href="{% url 'vista_tanita' %}">Tanita</a></li>
+			        		<li><a href="{% url 'vista_mapa' %}">Agregar Sitios</a></li>
+							<li><a href="{% url 'vista_logout' %}"> Cerrar Sesion
+						{% else %}
+						</li></a>
+					 <li><a href="{% url 'vista_login' %}">Login</a></li>
+					 {% endif %}
+	      			</li></a>
+			        <li><a href="{% url 'vista_about' %}">Quienes Somos</a></li>
+	      			<li><a href="{% url 'vista_contact' %}">Contacto</a></li>	
+      			</ul>
+    		</div>
+  		</nav>
+  		</header>
+    <div class = "container">
+    	<div class ="blue-grey lighten-4">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
 
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	<header>
-		<nav>
-			<div class="nav-wrapper green darken-2">
-				<img src="/media/images/00..png" class="brand-logo" ></img>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="{% url 'vista_principal' %}">Home</a></li>
-					<li><a href="{% url 'vista_about' %}">Quienes Somos</a></li>
-					<li><a href="{% url 'vista_tanita' %}">Tanita</a></li>
-					<li><a href="{% url 'vista_registro' %}">Registro</a></li>
-					{% if user.is_authenticated %}
-						<li><a href="{% url 'vista_logout' %}"> Cerrar Sesion</a></li>
-					{% else %}
-						<li><a href="{% url 'vista_login' %}">Login</a></li>
-					{% endif %}
-					<li><a href="{% url 'vista_contact' %}">Contacto</a></li>	
-				</ul>
-			</div>
-		</nav>
-	</header>
-<div class = "hero-unit">
-	{% block content %}
-	{% endblock %}
-</div>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWoDGHQ7W4NuQg0C_w6IIie-g-pHqz_qc"
+  type="text/javascript"></script>
+<script src="{{ MEDIA_URL }}js/scripts.js"></script>
+<footer>
+	
+<script>
+	
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+</footer>
+<script>
 
+$(document).ready(function(){
+	$('.parallax').parallax();
+});
+
+$(document).ready(function(){
+	$('.slider').slider({full_width: true});
+});
+
+$(".dropdown-button").dropdown();
+
+$(document).ready(function(){
+	$('.carousel').carousel();
+});
+/*camila*/
+$(document).ready(function() {
+	$('select').material_select();
+});
+</script>
 </body>
 </html>
 

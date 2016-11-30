@@ -2,23 +2,19 @@ from lgm.apps.home.models import *
 from django import forms
 from django.contrib.auth.models import User
 
-class add_Clase_form (forms.ModelForm):
-	class Meta:
-		model = Clase
-
-
 class Login_form(forms.Form):
 	usuario = forms.CharField(widget = forms.TextInput())
 	clave   = forms.CharField(widget = forms.PasswordInput(render_value = False))
 
-
-
-
-class RegisterForm(forms.Form):
-	username	= forms.CharField(label="Nombre de Usuario" ,widget=forms.TextInput())
-	email		= forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
+#class RegisterForm(forms.ModelForm):
+class RegisterForm(forms.ModelForm):
+	username		= forms.CharField(label="Nombre de Usuario" ,widget=forms.TextInput())
+	email			= forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
 	password_one	= forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two	= forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))
+	class Meta:
+		model = Persona
+		exclude = ['foto','enfermedad','user']
 
 	def clean_username(self):
 		username = self.cleaned_data['username']
@@ -49,3 +45,24 @@ class contact_form(forms.Form):
 	asunto = forms.CharField(widget = forms.TextInput())
 	comentario = forms.CharField(widget = forms.Textarea())
 
+class Tipo_Lugar_Form(forms.ModelForm):
+	class Meta:
+		model = Tipo_Lugar
+
+class UbicacionForm(forms.ModelForm):
+	tipo_lugar = forms.ModelChoiceField(queryset=Tipo_Lugar.objects.all(), empty_label="seleccione tipo lugar")
+	class Meta:
+		model = Ubicacion
+
+class ValoracionForm(forms.ModelForm):
+	class Meta:
+		model = Valoracion 
+		exclude = ['persona']
+
+
+	
+	
+	
+	
+	
+		

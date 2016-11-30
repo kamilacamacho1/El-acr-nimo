@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block title %} Mapa {% endblock %}
+{% block content %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/estilo.css">
+
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+
+</head>
+<body>
+
+	<div id="mapa" class="capas"></div>
+	<div id="datos" class="capas">
+		<div id="form">
+			<form action="/coords/save" method="post" id="form_coords">
+
+				{% csrf_token %}
+				{{ form.as_p }}
+				{{ ubicaciones }}
+
+				<p>
+					<input class="btn btn-inverse" type="submit" value="Guardar ubicacion">
+				</p>
+
+
+ <!-- <select class="browser-default">
+    <option value="" disabled selected>tipo de lugar</option>
+  	{% for ubicacion in ubicaciones %}
+				<option value="{{ ubicacion.nombre }}"> {{ ubicacion.nombre }}</option>
+			{% endfor %}
+  </select>
+-->
+
+<!--	</form>
+	
+	<input type = "button" onclick = "Agregar_Marcador()">
+		</div>
+		<!--<div id="data">
+			<ul id="ubicaciones">
+			{% for ubicacion in ubicaciones %}
+				<li>{{ ubicacion.nombre }} {{ ubicacion.tipo_lugar }} - hace {{ ubicacion.fecha|timesince }}</li>
+			{% endfor %}
+			</ul>
+		</div>-->
+	</div>
+
+	<link rel="stylesheet" type="text/css" href="/media/css/excite-bike/jquery-ui-1.10.3.custom.css">
+
+	<script type="/media/js/ajax.js"></script>
+	<script type="/media/js/jquery.js"></script>
+	<script type="/media/js/jquery-ui.js"></script>
+
+	<script>
+	
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWoDGHQ7W4NuQg0C_w6IIie-g-pHqz_qc"
+	type="text/javascript"></script>
+	<script src="{{ MEDIA_URL }}js/scripts.js"></script>
+
+	<script type="text/javascript">
+
+	var map = new google.maps.Map($('#mapa').get(0), mapSettings);
+
+	$(function(){
+		
+		if (navigator.geolocation)
+		{
+			navigator.geolocation.getCurrentPosition(getCoords, getError);
+		} else{
+			initialize(13.30272, -87.194107);
+		}
+
+		function getCoords(position)
+		{
+			var lat = position.coords.latitude;
+			var lng = position.coords.longitude;
+
+			initialize(lat, lng);
+		}
+
+		function getError(err)
+		{
+			initialize(13.30272, -87.194107);
+		}
+
+		function initialize(lat, lng)
+		{
+			var latlng = new google.maps.LatLng(lat, lng);
+			var mapSettings = {
+				center: latlng,
+				zoom: 15,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+			map = new google.maps.Map($('#mapa').get(0), mapSettings);
+
+			var marker = new google.maps.Marker({
+				position: latlng,
+				map: map,
+				draggable: true,
+				title: 'Arrastrame'
+			});
+
+			google.maps.event.addListener(marker, 'position_changed', function(){
+				getMarkerCoords(marker);
+			});
+		}
+
+
+		function getMarkerCoords(marker)
+		{
+			var markerCoords = marker.getPosition();
+			$('#id_lat').val( markerCoords.lat() );
+			$('#id_lng').val( markerCoords.lng() );
+		}
+		
+		$('#form_coords').submit(function(e){
+			e.preventDefault();
+
+			$.post('/coords/save', $(this).serialize(), function(data){
+				if (data.ok)
+				{
+					$('#data').html(data.msg);
+					$('#form_coords').each(function(){ this.reset(); });
+				} else {
+					alert(data.msg);
+				}
+			}, 'json');
+		});
+
+
+	});
+</script>
+
+
+{% for x in ubicaciones %}
+
+<script type="text/javascript">
+console.log({{ x }})
+var u = new google.maps.nombre({{ x }});
+var marker = new google.maps.Marker({
+	position : u,
+	title: "ya se pudo",
+	map:map
+
+});
+
+
+</script>
+{% endfor %}
+
+
+{% endblock %}

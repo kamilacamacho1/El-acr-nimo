@@ -160,3 +160,11 @@ LOGGING = {
         },
     }
 }
+
+# Aqui va la configuracion del servidor de correo GMAIL
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'sena954082@gmail.com' #ponen su correo
+EMAIL_HOST_PASSWORD = 'sena1234' #poner la clave de su correo
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True

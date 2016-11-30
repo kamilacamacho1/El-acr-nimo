@@ -1,38 +1,23 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
+{% block title %} Login {% endblock %}
 {% block content %}
-<html lang="es">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	<title>Lgm</title>
+<div class="container">
+	<div class="row">
+		<div class="col s12">
+			<form action="." method="POST" align="center">
+				{% csrf_token %}
+				{{mensage}}
+				{{form.as_p}}
+				<button type="submit" a class="waves-effect blue lighten-1 btn-large" type="submit"  value="Login"><i class="material-icons left">lock</i>Login </button></a>
+			</form>
+			<br>
+			<form align = "center">
+				<a href="/registro/"  class="waves-effect blue lighten-1 btn-large"><i class="material-icons left"> 
+					border_color</i>Registrar</a>
 
-	<!-- CSS  -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="/media/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link href="/media/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+			</form>
+		</div>
+	</div>		
+</div>
 
-	<!--  Scripts-->
-	<script src="/media/js/jquery-2.1.1.min.js"></script>
-	<script src="/media/js/materialize.js"></script>
-	<script src="/media/js/init.js"></script>
-</head>
-
-<body>
-	<div class="container">
-		<div class="row">
-			<div class="col s12">
-				<form action="." method="POST" align="center">
-					{% csrf_token %}
-					{{mensage}}
-					{{form.as_p}}
-					<button type="submit" a class="waves-effect  green darken-2 btn-large" type="submit"  value="Login">Login </button></a>
-				</form>
-				<br>
-				<form align = "center">
-					<a href="/registro/"  class="waves-effect  green darken-2 btn-large">Registrar</a>
-
-					</form>
-
-
-					{% endblock %}
+{% endblock %}

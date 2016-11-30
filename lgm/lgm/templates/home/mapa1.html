@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %} Mapa15455555 {% endblock %}
+{% block content %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/estilo.css">
+
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+
+</head>
+<body>
+
+	<div id="mapa" class="capas1"></div>
+
+
+ <!-- <select class="browser-default">
+    <option value="" disabled selected>tipo de lugar</option>
+  	{% for ubicacion in ubicaciones %}
+				<option value="{{ ubicacion.nombre }}"> {{ ubicacion.nombre }}</option>
+			{% endfor %}
+  </select>
+-->
+
+</form>
+</div>
+		<!--<div id="data">
+			<ul id="ubicaciones">
+			{% for ubicacion in ubicaciones %}
+				<li>{{ ubicacion.nombre }} {{ ubicacion.tipo_lugar }} - hace {{ ubicacion.fecha|timesince }}</li>
+			{% endfor %}
+			</ul>
+		</div>-->
+	</div>
+
+	<link rel="stylesheet" type="text/css" href="/media/css/excite-bike/jquery-ui-1.10.3.custom.css">
+
+	<script type="/media/js/ajax.js"></script>
+	<script type="/media/js/jquery.js"></script>
+	<script type="/media/js/jquery-ui.js"></script>
+
+	<script>
+
+	
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWoDGHQ7W4NuQg0C_w6IIie-g-pHqz_qc"
+	type="text/javascript"></script>
+	<script src="{{ MEDIA_URL }}js/scripts.js"></script>
+
+
+	{% endblock %}

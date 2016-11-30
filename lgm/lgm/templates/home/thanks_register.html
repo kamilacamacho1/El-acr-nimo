@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
+{% block title %} Registro {% endblock %}
 {% block content %}
-	<center>
+<center>
 	<form action="." method="POST">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<h2> Gracias por registrarte!!! </h2>
-	<a href='/login' a class="waves-effect green darken-2 btn-large" >Iniciar Sesion</a>
+		{% csrf_token %}
+		{{ form.as_p }}
+		<h2> Gracias por registrarte!!! </h2>
+		<a href='/login' a class="waves-effect blue lighten-1 btn-large" ><i class="material-icons left">group</i>Iniciar Sesion</a>
 	</form>
 {% endblock %}
 

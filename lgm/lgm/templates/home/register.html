@@ -1,32 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}{% endblock %}
+{% block title %} Registro {% endblock %}
 {% block content %}
-<html lang="es">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	<title>Lgm</title>
+<center>
+	<div class="container">
+		<div class="col s6">
+			<form action="." method = "POST" align="center">
+				{% csrf_token %}
+				{{ form.as_p }}
 
-	<!-- CSS  -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="/media/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link href="/media/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+				<button type="submit" a class="waves-effect blue lighten-1 btn-large" ><i class="material-icons left"> 
+					border_color</i>Registrar 
 
-	<!--  Scripts-->
-	<script src="/media/js/jquery-2.1.1.min.js"></script>
-	<script src="/media/js/materialize.js"></script>
-	<script src="/media/js/init.js"></script>
-</head>
+				</button></a>
+			</form>
+		</div>
+	</div>
 
-<body>
-	<center>
-		<div class="container">
-			<div class="col s6">
-				<form action="." method = "POST" align="center">
-					{% csrf_token %}
-					{{ form.as_p }}
 
-					<button type="submit" a class="waves-effect  green darken-2 btn-large" >Registrar </button></a>
-					</form>
 
-					{% endblock %}
+{% endblock %}
