@@ -138,7 +138,7 @@ def reporte_view(request):
 			else:
 				info= "Fallo"
 		else:
-			listaValoraciones = Valoracion.objects.all()		
+			listaValoraciones = Valoracion.objects.filter(persona__user = request.user)		
 			ctx = {'lista':listaValoraciones , 'masamuscular':masamuscular,'peso':peso,'grasa_viceral':grasa_viceral,'grasa_corporal':grasa_corporal,'agua':agua,'masa_osea':masa_osea,'edad_metabolica':edad_metabolica,'bmr':bmr,'info_enviado':info_enviado}
 			return render_to_response('home/reporte.html', ctx, context_instance = RequestContext(request)) 
 	else:
@@ -174,7 +174,7 @@ def grafica_view(request):
 			else:
 				info= "Fallo"
 		else:
-			listaValoraciones = Valoracion.objects.all()		
+			listaValoraciones = Valoracion.objects.filter(persona__user = request.user)		
 			ctx = {'lista':listaValoraciones , 'masamuscular':masamuscular,'peso':peso,'grasa_viceral':grasa_viceral,'grasa_corporal':grasa_corporal,'agua':agua,'masa_osea':masa_osea,'edad_metabolica':edad_metabolica,'bmr':bmr,'info_enviado':info_enviado}
 			return render_to_response('home/grafica.html', ctx, context_instance = RequestContext(request)) 
 	else:
