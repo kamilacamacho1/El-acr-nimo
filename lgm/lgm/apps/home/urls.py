@@ -16,6 +16,8 @@ urlpatterns = patterns('lgm.apps.home.views',
 		#Graficas
 		url(r'^grafica/$', 'grafica_view', name = 'vista_grafica'),
 		url(r'^reporte/$', 'reporte_view', name = 'vista_reporte'),
+		url(r'^grasa/$', 'grasa_view', name = 'vista_grasa'),
+
 
 
 		url(r'^nutricion/$', 'nutricion_view', name = 'vista_nutricion'),
