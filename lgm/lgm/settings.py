@@ -127,7 +127,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'lgm.apps.home',
-    'lgm.apps.reportes',
+    'lgm.apps.reportes',  
+    'lgm.apps.admin',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

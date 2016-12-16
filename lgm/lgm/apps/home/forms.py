@@ -2,6 +2,7 @@ from lgm.apps.home.models import *
 from django import forms
 from django.contrib.auth.models import User
 
+
 class Login_form(forms.Form):
 	usuario = forms.CharField(widget = forms.TextInput())
 	clave   = forms.CharField(widget = forms.PasswordInput(render_value = False))
@@ -12,6 +13,7 @@ class RegisterForm(forms.ModelForm):
 	email			= forms.EmailField(label="Correo Electronico",widget=forms.TextInput())
 	password_one	= forms.CharField(label="Password",widget=forms.PasswordInput(render_value=False))
 	password_two	= forms.CharField(label="Confirmar password",widget=forms.PasswordInput(render_value=False))
+	fecha_nacimiento = forms.DateField(widget=forms.TextInput(attrs={'id':'datepicker'}))
 	class Meta:
 		model = Persona
 		exclude = ['foto','enfermedad','user']
@@ -58,6 +60,11 @@ class ValoracionForm(forms.ModelForm):
 	class Meta:
 		model = Valoracion 
 		exclude = ['persona']
+
+class DatoForm(forms.ModelForm):
+	class Meta:
+		model = Persona 
+		exclude = ['genero','fecha_nacimiento','user']
 
 
 	

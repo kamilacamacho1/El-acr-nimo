@@ -9,12 +9,12 @@
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         arreglo=[
-           ['Mes', 'Grasa Corporal',]
+           ['Mes', 'Masa Osea',]
         ]
 
 
       {%  for item in lista %}
-            arreglochico= ["{{item.fecha_hora}}",Number ("{{item.grasa_corporal}}")  ]
+            arreglochico= ["{{item.fecha_hora}}",Number ("{{item.masa_osea}}")  ]
             arreglo.push(arreglochico)
 
 
@@ -28,11 +28,11 @@
     var options = {
       title : 'TU Composicion Corporal',
       vAxis: {title: 'Valoracion'},
-      hAxis: {title: 'Fecha'},
+      hAxis: {title: 'Mes'},
       series: {1: {type: 'line'}}
     };
 
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div2'));
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div3'));
     chart.draw(data, options);
   }
     </script>
@@ -41,13 +41,6 @@
 </head>
 
 
-
-
-   <div id="chart_div2" style="width: 900px; height: 500px;"></div>
-
- 
-
-   
-
+   <div id="chart_div3" style="width: 900px; height: 500px;"></div>
 
 {% endblock %}

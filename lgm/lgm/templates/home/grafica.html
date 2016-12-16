@@ -4,46 +4,75 @@
 
 
 
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
-      function drawVisualization() {
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawVisualization);
+function drawVisualization() {
         // Some raw data (not necessarily accurate)
         arreglo=[
-           ['Mes', 'Porcentaje de Agua']
+        ['Mes', 'Porcentaje de Agua']
         ]
 
 
-      {%  for item in lista %}
-            arreglochico= ["2016/09/2000", Number("{{item.agua}}")  ]
-            arreglo.push(arreglochico)
+        {%  for item in lista %}
+        arreglochico= ["{{item.fecha_hora}}", Number("{{item.agua}}")  ]
+        arreglo.push(arreglochico)
 
 
         {% endfor %}
 
         console.log(arreglo)
-       
+
         data = google.visualization.arrayToDataTable(arreglo)
 
 
-    var options = {
-      title : 'TU Composicion Corporal',
-      vAxis: {title: 'Valoracion'},
-      hAxis: {title: 'Mes'},
-      series: {1: {type: 'line'}}
-    };
+        var options = {
+          title : 'TU Composicion Corporal',
+          vAxis: {title: 'Valoracion'},
+          hAxis: {title: 'Fecha'},
+          series: {1: {type: 'line'}}
+        };
 
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-  }
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      </script>
+
+
+    </head>
+
+
+    <H2>GRAFICA</H2>
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('ul.tabs').tabs();
+    });
     </script>
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a href="#test1">Grasa Corporal</a></li>
+          <li class="tab col s3"><a href="#test2">Masa Osea</a></li>
+          <li class="tab col s3"><a href="#test3">Porcetanje de Agua</a></li>
+          <li class="tab col s3"><a href="#test4">Grasa Visceral</a></li>
+        </ul>
+      </div>
+      <div id="test1" class="col s12">
+        {% include 'home/grasa.html' %}
+      </div>
+      <div id="test2" class="col s12">
+        {% include 'home/osea.html' %}
+      </div>
+      <div id="test3" class="col s12">
+        <div id="chart_div" style="width: 900px; height: 500px;"></div>
+      </div>
+      <div id="test4" class="col s12">
+        {% include 'home/viceral.html' %}
+     </div>
+   </div>
 
 
-</head>
-
-
-  <H2>GRAFICA</H2>
-   <div id="chart_div" style="width: 900px; height: 500px;"></div>
-
-{% endblock %}
+  {% endblock %}

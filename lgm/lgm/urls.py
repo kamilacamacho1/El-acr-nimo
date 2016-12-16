@@ -11,7 +11,10 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^',include('lgm.apps.home.urls')),
+    url(r'^',include('lgm.apps.admin.urls')),
+    #url(r'^',include('lgm.apps.reportes.urls')),
     url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
+    
     #url(r'^',include('Lgm.apps.reportes.urls')),
     # url(r'^Lgm/', include('Lgm.foo.urls')),
     

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 ''' Enfermedades '''
 class Tipo_Enfermedad(models.Model):
-	nombre = models.CharField(max_length = 100)
+	nombre = models.CharField(max_length = 100, unique=True)
 
 	def __unicode__ (self):
 		return self.nombre
@@ -13,7 +13,7 @@ class Tipo_Enfermedad(models.Model):
 
 
 class Enfermedad(models.Model):
-	nombre = models.CharField(max_length = 100)
+	nombre = models.CharField(max_length = 100,unique=True)
 	#codigo = models.CharField(max_length = 100)
 	#origen = models.TextField(max_length = 500)
 	#curso  = models.CharField(max_length = 100)
@@ -34,7 +34,7 @@ class Producto(models.Model):
 		ruta = "MultimediaData/Productos/%s/%s"%(self.nombre, str(filename))
 		return rutams
 
-	nombre      = models.CharField(max_length = 100)
+	nombre      = models.CharField(max_length = 100, unique=True)
 	precio      = models.CharField(max_length = 100)
 	descripcion = models.TextField(max_length=100)
 	#stock       = models.IntegerField()
@@ -75,9 +75,9 @@ HORARIOS=(
 )	
 	
 class Dieta(models.Model):
-	clasificacion= models.CharField(max_length = 100)
+	clasificacion= models.CharField(max_length = 100,unique=True)
 	horario      = models.CharField(max_length = 100, choices = HORARIOS )
-	suplementos  = models.TextField(max_length=100)
+	suplementos  = models.TextField(max_length=100,unique=True)
 	porciones    = models.CharField(max_length=100)
 	producto     = models.ManyToManyField(Producto, null= True, blank = True)
 
@@ -99,11 +99,11 @@ class Persona (models.Model):
 	def url(self, filename):
 		ruta = "MultimediaData/User/%s/%s"%(self.user.username,filename)
 		return ruta
-	#foto 			 = models.ImageField(upload_to=url)
 	genero           = models.CharField(max_length=50, choices = GENEROS)
 	fecha_nacimiento = models.DateField()
 	enfermedad       = models.ManyToManyField(Enfermedad, null= True, blank =True)
 	user             = models.OneToOneField(User)
+	#foto 			 = models.ImageField(upload_to=url)
 
 	def __unicode__ (self):
 		return self.user.username
@@ -128,7 +128,7 @@ class Valoracion(models.Model):
 	
 
 	def __unicode__ (self):
-		return self.masamuscular
+		return self.id
 
 	class Meta:
 		verbose_name_plural = "Valoracion"
@@ -137,7 +137,7 @@ class Valoracion(models.Model):
 	
 
 class Tipo_Lugar(models.Model):
-	nombre = models.CharField(max_length=200)
+	nombre = models.CharField(max_length=200,unique=True)
 
 	def __unicode__(self):
 		return self.nombre
@@ -147,7 +147,7 @@ class Tipo_Lugar(models.Model):
 	
 
 class Ubicacion(models.Model):
-	nombre = models.CharField(max_length=200)
+	nombre = models.CharField(max_length=200,unique=True)
 	lat = models.CharField(max_length=50)
 	lng = models.CharField(max_length=50)
 	fecha = models.DateTimeField(auto_now_add=True)

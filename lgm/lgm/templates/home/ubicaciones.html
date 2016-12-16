@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block title %} Mapa15455555 {% endblock %}
+{% block content %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+
+</head>
+<body>
+
+	<div id="mapas" class="capas1"></div>
+
+
+</form>
+</div>
+
+	</div>
+
+	<link rel="stylesheet" type="text/css" href="/media/css/excite-bike/jquery-ui-1.10.3.custom.css">
+
+	<script type="/media/js/ajax.js"></script>
+	<script type="/media/js/jquery.js"></script>
+	<script type="/media/js/jquery-ui.js"></script>
+
+	<script>
+
+	
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+	</script>
+
+
+	<script>
+
+		$(function(){
+	if (navigator.geolocation)
+	{
+		navigator.geolocation.getCurrentPosition(getCoords, getError);
+	} else{
+		initialize(13.30272, -87.194107);
+	}
+
+
+
+	function getCoords(position)
+	{
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+
+		initialize(lat, lng);
+	}
+
+	function getError(err)
+	{
+		initialize(13.30272, -87.194107);
+	}
+
+
+	function initialize(lat, lng)
+	{
+		var latlng = new google.maps.LatLng(lat, lng);
+		var mapSettings = {
+			center: latlng,
+			zoom: 15,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map($('#mapas').get(0), mapSettings);
+
+		var marker = new google.maps.Marker({
+		position: latlng,
+		map: map,
+		draggable: false,
+		title: 'Yo',
+		});
+
+
+	{% for x in ubicaciones %}
+		var marker = new google.maps.Marker({
+		position: new google.maps.LatLng({{ x }}),
+		map: map,
+		draggable: false,
+		title:'',
+		});
+	{% endfor %}
+
+	
+
+
+		google.maps.event.addListener(marker, 'position_changed', function(){
+			getMarkerCoords(marker);
+		});
+	}
+});
+
+	</script>
+
+
+	<script src="{{ MEDIA_URL }}js/scripts3.js"></script>
+	<script type="text/javascript"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWoDGHQ7W4NuQg0C_w6IIie-g-pHqz_qc"></script>
+
+
+
+
+
+
+	{% endblock %}
+
+

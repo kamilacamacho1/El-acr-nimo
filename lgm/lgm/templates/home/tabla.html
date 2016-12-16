@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% block content %} 
+
+<a href="{% url 'vista_tanita' %}" class="waves-effect green darken-2 btn-large"><i class="material-icons left">add</i> Agregar una  Valoracion</a>
+
+
+
+{% if lista %}
+
+<table>
+        <thead>
+          <tr>
+              <th data-field="">Fecha</th>
+              <th data-field="">Masa Muscular</th>
+              <th data-field="">Peso</th>
+              <th data-field="">Grasa Visceral</th>
+              <th data-field="">Grasa Corporal</th>
+              <th data-field="">Porcentaje De Agua</th>
+              <th data-field="">Masa Osea</th>
+              <th data-field="">Edad Metabolica</th>
+              <th data-field="">BMR</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for t in lista %}
+          <tr>
+            <td>{{t.fecha_hora}}</td>
+            <td>{{t.masamuscular}}</td>
+            <td>{{t.peso}}</td>
+            <td>{{t.grasa_viceral}}</td>
+            <td>{{t.grasa_corporal}}</td>
+            <td>{{t.agua}}</td>
+            <td>{{t.masa_osea}}</td>
+            <td>{{t.edad_metabolica}}</td>
+            <td>{{t.bmr}}</td>
+          </tr>
+          {% endfor %}          
+        </tbody>
+      </table>
+
+{% else %}
+  <center>
+    <h4>
+    En este moento no  posee ninguna  valoracion  agregue una
+    </h4>
+
+  </center>
+{% endif %}
+{% endblock %}      

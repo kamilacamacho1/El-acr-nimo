@@ -16,7 +16,7 @@
 
 
       {%  for item in lista %}
-            arreglochico= ["2016/09/2000", Number("{{item.masamuscular}}"), Number("{{item.peso}}"),Number("{{item.grasa_viceral}}"),Number ("{{item.grasa_corporal}}"),Number ("{{item.masa_osea}}"),Number( "{{item.agua}}"),Number ("{{item.edad_metabolica}}"),Number ("{{item.bmr}}")  ]
+            arreglochico= ["{{item.fecha_hora}}", Number("{{item.masamuscular}}"), Number("{{item.peso}}"),Number("{{item.grasa_viceral}}"),Number ("{{item.grasa_corporal}}"),Number ("{{item.masa_osea}}"),Number( "{{item.agua}}"),Number ("{{item.edad_metabolica}}"),Number ("{{item.bmr}}")  ]
             arreglo.push(arreglochico)
 
 
@@ -30,7 +30,7 @@
     var options = {
       title : 'TU Composicion Corporal',
       vAxis: {title: 'Valoracion'},
-      hAxis: {title: 'Mes'},
+      hAxis: {title: 'Fecha'},
       seriesType: 'bars',
       series: {5: {type: 'line'}}
     };

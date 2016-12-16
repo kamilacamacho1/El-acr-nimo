@@ -8,139 +8,20 @@ from django.contrib.auth.models import User
 from django.utils import simplejson
 from django.core.mail import EmailMultiAlternatives
 from django.utils.timesince import timesince
+from datetime import date 
 
 def nutricion_view (request):
 	return render_to_response('home/nutricion.html', context_instance = RequestContext(request))
-#reporte
-def grafica_view(request):
-	masamuscular = 0
-	peso = 0
-	grasa_viceral = 0	
-	grasa_corporal = 0
-	agua = 0
-	masa_osea = 0
-	edad_metabolica = 0
-	bmr = 0
-	info_enviado = True
-	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado  o logueado
-		if request.method == "POST":
-			form = ValoracionForm(request.POST)
-			if formulario.is_valid():
 
-
-				masamuscular    = Valoracion.objects.filter(persona__user = request.user).count()			
-				peso            = Valoracion.objects.filter(persona__user = request.user).count()
-				grasa_viceral   = Valoracion.objects.filter(persona__user = request.user).count()
-				grasa_corporal  = Valoracion.objects.filter(persona__user = request.user).count()
-				agua            = Valoracion.objects.filter(persona__user = request.user).count()
-				masa_osea       = Valoracion.objects.filter(persona__user = request.user).count()
-				edad_metabolica = Valoracion.objects.filter(persona__user = request.user).count()
-				bmr             = Valoracion.objects.filter(persona__user = request.user).count()
-				info = "Valoracion Guardada"
-				return HttpResponseRedirect('/grafica/')
-			else:
-				info= "Fallo"
-		else:
-			listaValoraciones = Valoracion.objects.filter(persona__user = request.user)		
-			ctx = {'lista':listaValoraciones , 'masamuscular':masamuscular,'peso':peso,'grasa_viceral':grasa_viceral,'grasa_corporal':grasa_corporal,'agua':agua,'masa_osea':masa_osea,'edad_metabolica':edad_metabolica,'bmr':bmr,'info_enviado':info_enviado}
-			return render_to_response('home/grafica.html', ctx, context_instance = RequestContext(request)) 
-	else:
-		return HttpResponseRedirect('/grafica/')
-def reporte_view(request):
-
-	masamuscular = 0
-	peso = 0
-	grasa_viceral = 0	
-	grasa_corporal = 0
-	agua = 0
-	masa_osea = 0
-	edad_metabolica = 0
-	bmr = 0
-	info_enviado = True
-	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado  o logueado
-		if request.method == "POST":
-			form = ValoracionForm(request.POST)
-			if formulario.is_valid():
-
-
-				masamuscular    = Valoracion.objects.filter(persona__user = request.user).count()			
-				peso            = Valoracion.objects.filter(persona__user = request.user).count()
-				grasa_viceral   = Valoracion.objects.filter(persona__user = request.user).count()
-				grasa_corporal  = Valoracion.objects.filter(persona__user = request.user).count()
-				agua            = Valoracion.objects.filter(persona__user = request.user).count()
-				masa_osea       = Valoracion.objects.filter(persona__user = request.user).count()
-				edad_metabolica = Valoracion.objects.filter(persona__user = request.user).count()
-				bmr             = Valoracion.objects.filter(persona__user = request.user).count()
-				info = "Valoracion Guardada"
-				return HttpResponseRedirect('reporte')
-			else:
-				info= "Fallo"
-		else:
-			listaValoraciones = Valoracion.objects.filter(persona__user = request.user)		
-			ctx = {'lista':listaValoraciones , 'masamuscular':masamuscular,'peso':peso,'grasa_viceral':grasa_viceral,'grasa_corporal':grasa_corporal,'agua':agua,'masa_osea':masa_osea,'edad_metabolica':edad_metabolica,'bmr':bmr,'info_enviado':info_enviado}
-			return render_to_response('home/reporte.html', ctx, context_instance = RequestContext(request)) 
-	else:
-		return HttpResponseRedirect('/reporte/')
-
-		
-def tanita_view (request):
-	form = ValoracionForm()
-	usu = request.user.id
-	p = Persona.objects.get(user_id = usu)
-	if request.method == "POST":
-		form = ValoracionForm(request.POST)
-		if form.is_valid():
-			masamuscular    = form.cleaned_data['masamuscular']
-			peso            = form.cleaned_data['peso']
-			grasa_viceral   = form.cleaned_data['grasa_viceral']
-			grasa_corporal  = form.cleaned_data['grasa_corporal']
-			agua            = form.cleaned_data['agua']
-			masa_osea       = form.cleaned_data['masa_osea']
-			edad_metabolica = form.cleaned_data['edad_metabolica']
-			bmr             = form.cleaned_data['bmr']
-			valoracion = Valoracion.objects.create(
-				masamuscular  = masamuscular,
-				peso  = peso,
-				grasa_viceral  = grasa_viceral,
-				grasa_corporal = grasa_corporal,
-				agua  = agua,
-				masa_osea  = masa_osea,
-				edad_metabolica  = edad_metabolica,
-				bmr  = bmr,
-				persona = p
-				)
-			return HttpResponseRedirect('/reporte/')
-	else:
-		form = ValoracionForm()
-	ctx = {'form':form}
-	return render_to_response('home/tanita.html',ctx,context_instance = RequestContext(request))
-
-	
-def grasa_view(request):
-
-	grasa_corporal = 0
-
-	info_enviado = True
-	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado  o logueado
-		if request.method == "POST":
-			form = ValoracionForm(request.POST)
-			if formulario.is_valid():
-
-
-				grasa_corporal  = Valoracion.objects.filter(persona__user = request.user).count()
-				return HttpResponseRedirect('/grasa/')
-			else:
-				info= "Fallo"
-		else:
-			listaValoraciones = Valoracion.objects.filter(persona__user = request.user)		
-			ctx = {'lista':listaValoraciones ,'grasa_corporal':grasa_corporal,'info_enviado':info_enviado}
-			return render_to_response('home/grasa.html', ctx, context_instance = RequestContext(request)) 
-	else:
-		return HttpResponseRedirect('/grasa/')
+def valoraciones_view (request):
+	p = User.objects.get(id = request.user.id)
+	lista = Valoracion.objects.filter(persona__user = p)
+	return render(request,'home/tabla.html',locals())
 
 
 def register_view(request):
 		form = RegisterForm()
+		now = date.today()
 		if request.method == "POST":
 			form = RegisterForm(request.POST)
 			if form.is_valid():
@@ -153,14 +34,11 @@ def register_view(request):
 				u = User.objects.create_user(username=usuario,email=email,password=password_one)
 				u.save()
 				p = Persona.objects.create(genero=genero,fecha_nacimiento=fecha_nacimiento, user = u)
-			p.save() # Guardar el objeto
+				p.save() # Guardar el objeto
 			return render_to_response('home/thanks_register.html',context_instance=RequestContext(request))
 		else:
-			ctx = {'form':form}
+			ctx = {'form':form, 'now':now}
 			return render_to_response('home/register.html',ctx,context_instance = RequestContext(request))
-			ctx = {'form':form}
-			return render_to_response('home/register.html',ctx,context_instance = RequestContext(request))
-
 
 
 def index_view (request):
@@ -196,13 +74,84 @@ def logout_view(request):
 
 '''
 lista=[1,2,3,a,hola]
-lista[4]
+lista[-1]
 lista.ALGO ULTIMO ELEMENTO DE LA LISTA
 
 '''
 
 
+#graficas
+def grafica_view(request):
 
+	info_enviado = True
+	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado
+		listaValoraciones = Valoracion.objects.filter(persona__user = request.user)[:6]	
+		ctx = {'lista':listaValoraciones ,'info_enviado':info_enviado}
+		return render_to_response('home/grafica.html', ctx, context_instance = RequestContext(request)) 
+	else:
+		return HttpResponseRedirect('/grafica/')
+
+def reporte_view(request):
+
+	info_enviado = True
+	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado
+		listaValoraciones = Valoracion.objects.filter(persona__user = request.user)[:6]	
+		ctx = {'lista':listaValoraciones ,'info_enviado':info_enviado}
+		return render_to_response('home/reporte.html', ctx, context_instance = RequestContext(request)) 
+	else:
+		return HttpResponseRedirect('/reporte/')
+
+		
+def tanita_view (request):
+	form = ValoracionForm()
+	usu = request.user.id
+	p = Persona.objects.get(user_id = usu)
+	if request.method == "POST":
+		form = ValoracionForm(request.POST)
+		if form.is_valid():
+			val = form.save(commit = False)
+			val.persona = p
+			val.save() 
+			return HttpResponseRedirect('/valoraciones/')
+	else:
+		form = ValoracionForm()
+	ctx = {'form':form}
+	return render_to_response('home/tanita.html',ctx,context_instance = RequestContext(request))
+
+	
+def grasa_view(request):
+	info_enviado = True
+	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado
+		listaValoraciones = Valoracion.objects.filter(persona__user = request.user)[:6]	
+		ctx = {'lista':listaValoraciones ,'info_enviado':info_enviado}
+		return render_to_response('home/grasa.html', ctx, context_instance = RequestContext(request)) 
+	else:
+		return HttpResponseRedirect('/grasa/')
+
+
+
+def osea_view(request):
+	info_enviado = True
+	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado
+		listaValoraciones = Valoracion.objects.filter(persona__user = request.user)[:6]	
+		ctx = {'lista':listaValoraciones ,'info_enviado':info_enviado}
+		return render_to_response('home/osea.html', ctx, context_instance = RequestContext(request)) 
+	else:
+		return HttpResponseRedirect('/osea/')
+
+
+def viceral_view(request):
+
+	info_enviado = True
+	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado
+		listaValoraciones = Valoracion.objects.filter(persona__user = request.user)[:6]	
+		ctx = {'lista':listaValoraciones ,'info_enviado':info_enviado}
+		return render_to_response('home/viceral.html', ctx, context_instance = RequestContext(request)) 
+	else:
+		return HttpResponseRedirect('/viceral')
+
+
+#graficas
 
 
 
@@ -276,7 +225,20 @@ def mapa_view(request):
 	return render_to_response('home/mapa.html', {'form':form, 'ubicaciones':lista}, context_instance = RequestContext(request))
 
 
-def mapa1_view(request):
-	#ubicacion = ubicacion.objects.all()
-	return render_to_response('home/mapa1.html', context_instance = RequestContext(request))
+def ubicaciones_view(request):
+	ubicaciones = Ubicacion.objects.all()
+	lista = []
+	for x in ubicaciones:
+		ubicacion = str (x.lat+","+x.lng)
+		lista.append(ubicacion)
+	
+
+	return render_to_response('home/ubicaciones.html', {'ubicaciones':lista, 'nombre': ubicaciones}, context_instance = RequestContext(request))
+
+
 # Create your views here.
+#administrador
+
+
+
+#administrador
