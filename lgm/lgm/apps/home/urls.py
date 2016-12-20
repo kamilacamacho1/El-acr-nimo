@@ -11,6 +11,8 @@ urlpatterns = patterns('lgm.apps.home.views',
 		url(r'^mapa/$', 'mapa_view', name = 'vista_mapa'),
 		url(r'^coords/save$', 'coords_save', name = 'coords_save'),
 		url(r'^ubicaciones/$', 'ubicaciones_view', name = 'vista_ubicaciones'),
+		url(r'^dato/$', 'dato_view', name = 'vista_dato'),
+		url(r'^seleccionar_enfermedades/$', 'seleccionar_enfermedades_view', name = 'vista_seleccionar'),
 #graficas
 		url(r'^grafica/$', 'grafica_view', name = 'vista_grafica'),
 		url(r'^reporte/$', 'reporte_view', name = 'vista_reporte'),

@@ -55,11 +55,10 @@
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<header>
 		<nav>
-			<div class="nav-wrapper  green darken-2">
+			<div class="nav-wrapper  light-green accent-2">
 				<a href="#" class="brand-logo">Logo</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="{% url 'vista_principal' %}">Home</a></li>
-					<li><a href="{% url 'vista_nutricion' %}">Nutricion Sugerida</a></li>
 					{% if user.is_anonymous %}
 						<li><a href="{% url 'vista_registro' %}">Registro</a></li>
 					{% endif %}
@@ -67,14 +66,19 @@
 					<li><a href="{% url 'vista_ubicaciones' %}">Sitios de Interes</a></li>
 					{% endif %}
 					{% if user.is_superuser %}
+						<li><a href="/productos/page/1"> Producto</a></li>
 						<li><a href="{% url 'vista_mapa' %}">Agregar Sitios</a></li>
 						<li><a href="/enfermedades/page/1"> Enfermedad</a></li>
 						<li><a href="{% url 'vista_agregar_tipo' %}">Tipo de Enfermedad</a></li>
+						<li><a href="{% url 'enfermedad_producto' %}">Producto Enfermedad</a></li>
 						
 						
 					{% endif %}
 					{% if user.is_authenticated %}
 					{% if not user.is_superuser %}
+					<li><a href="{% url 'vista_nutricion' %}">Nutricion Sugerida</a></li>
+					<li><a href="{% url 'vista_dato' %}">Actualizar Datos</a></li>
+					<li><a href="{% url 'vista_seleccionar' %}">Mis Enfermedades</a></li>
 					<li><a href="{% url 'vista_reporte' %}">Reporte</a></li>
 					<li><a href="{% url 'vista_valoraciones' %}">Mis Valoraciones</a></li>
 					<li><a href="{% url 'vista_grafica' %}">graficas</a></li>

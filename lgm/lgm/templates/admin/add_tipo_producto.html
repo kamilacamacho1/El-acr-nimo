@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+	<title>Agregar tipo de producto</title>
+{% endblock %}
+	
+{% block content %}
+	<form action="." method = "POST" enctype = "multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" > Guardar </button>
+		<input type = "reset" value = "Limpiar"/>
+	</form>
+	<br>
+{% for i in tipos %}
+	{{ i.nombre }}	
+	<a href="{% url 'vista_eliminar_tipo_producto' %}">Eliminar</a>
+	<br>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	<title>Agregar una Enfermedad</title>
+{% endblock %}
+	
+{% block content %}
+	<form action="." method = "POST" enctype = "multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" > Guardar </button>
+		<input type = "reset" value = "Limpiar"/>
+	</form>
+	<br>
+
+	<h5>
+	{{ info }}
+	</h5>
+
+	<h4>Enfermedades recomendadas  para  diferentes  productos</h4>
+	{% for i in lista %}
+		{{ i }} <br>
+	{% endfor %}
+	
+{% endblock %}
