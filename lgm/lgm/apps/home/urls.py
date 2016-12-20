@@ -12,7 +12,7 @@ urlpatterns = patterns('lgm.apps.home.views',
 		url(r'^coords/save$', 'coords_save', name = 'coords_save'),
 		url(r'^ubicaciones/$', 'ubicaciones_view', name = 'vista_ubicaciones'),
 		url(r'^dato/$', 'dato_view', name = 'vista_dato'),
-		url(r'^seleccionar_enfermedades/$', 'seleccionar_enfermedades_view', name = 'vista_seleccionar'),
+		url(r'^seleccionar_enfermedades$', 'seleccionar_enfermedades_view', name = 'vista_seleccionar'),
 #graficas
 		url(r'^grafica/$', 'grafica_view', name = 'vista_grafica'),
 		url(r'^reporte/$', 'reporte_view', name = 'vista_reporte'),
@@ -24,7 +24,6 @@ urlpatterns = patterns('lgm.apps.home.views',
 		url(r'^nutricion/$', 'nutricion_view', name = 'vista_nutricion'),
 		url(r'^valoraciones/$', 'valoraciones_view', name = 'vista_valoraciones'),
 		url(r'^agregar/valoracion/$', 'tanita_view', name = 'vista_tanita'),
-		
 		
 
 )

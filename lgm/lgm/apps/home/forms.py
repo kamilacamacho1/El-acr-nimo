@@ -18,9 +18,6 @@ class RegisterForm(forms.ModelForm):
 		model = Persona
 		exclude = ['foto','enfermedad','user']
 
-
-
-
 	def clean_username(self):
 		username = self.cleaned_data['username']
 		try:
@@ -65,7 +62,7 @@ class ValoracionForm(forms.ModelForm):
 		exclude = ['persona']
 
 
-class sel_enf_form(forms.ModelForm):
+class seleccionar_enfermedades_form(forms.ModelForm):
 	class Meta:
 		model = Persona
 		exclude = ['genero','fecha_nacimiento','user']
@@ -76,7 +73,7 @@ class DatoForm(forms.ModelForm):
 	fecha_nacimiento = forms.DateField(widget=forms.TextInput(attrs={'id':'datepicker'}))
 	class Meta:
 		model = Persona
-		exclude = ['genero','user','enfermedad']#,'fecha_nacimiento']
+		exclude = ['genero','user']#,'fecha_nacimiento']
 
 class user_form(forms.ModelForm):
 	class Meta:

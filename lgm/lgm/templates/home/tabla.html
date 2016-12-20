@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}{% endblock %}
 {% block content %} 
-
-<a href="{% url 'vista_tanita' %}" class="waves-effect green darken-2 btn-large"><i class="material-icons left">add</i> Agregar una  Valoracion</a>
-
-
-
+<div class="container">
+  <br>
 {% if lista %}
-
-<table>
+      <table class="bordered striped">
         <thead>
           <tr>
               <th data-field="">Fecha</th>
@@ -43,9 +39,14 @@
 {% else %}
   <center>
     <h4>
-    En este moento no  posee ninguna  valoracion  agregue una
+    En este momento no cuenta con ninguna valoración, si usted lo desea puede agregarla ahora
     </h4>
 
+
+<a href="{% url 'vista_tanita' %}" class="waves-effect light-green accent-2 btn-large"><i class="material-icons left">add</i> Agregar una  Valoración</a>
+<br>
   </center>
+</div>
+
 {% endif %}
 {% endblock %}      

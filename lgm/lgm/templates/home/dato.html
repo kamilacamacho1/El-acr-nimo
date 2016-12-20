@@ -7,39 +7,32 @@
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
 <center>
+  <br>
   <div class="container">
-
     <div class="col s6">
-      <div class="green lighten-5">  
-        <h4>Actualizar  datos  Personales </h4>
-      </div>
-
       <form action="." method = "POST" align="center">
-        
+
         {% csrf_token %}
         {{ form.as_p }}
-        {{ form_b.as_p }}
         <script>
-        $(function() {
-          $( "#datepicker" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "1900:2080",
-            dateFormat: 'dd/mm/yy',
+          $(function() {
+            $( "#datepicker" ).datepicker({
+              changeMonth: true,
+              changeYear: true,
+              yearRange: "1900:2080",
+              dateFormat: 'dd/mm/yy',
       // You can put more options here.
 
-  });
-        });
-        </script>
+    });
+  </script>
 
-        <button type="submit" a class="waves-effect green darken-2 btn-large" ><i class="material-icons left"> 
-          border_color</i>Guardar
-
-        </button></a>
-      </form>
-    </div>
-  </div>
+  <button type="submit" a class="waves-effect light-green accent-2 btn-large" ><i class="material-icons left"> 
+    border_color</i>Guardar
+  </button></a>
+</form>
+</div>
+</div>
 
 
 
-  {% endblock %}
+{% endblock %}

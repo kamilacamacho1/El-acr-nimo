@@ -11,18 +11,9 @@ from django.utils.timesince import timesince
 from datetime import date 
 
 def nutricion_view (request):
-	if request.user.is_authenticated(): #verifica si el ususario ya estas authentificado
-		p = Persona.objects.get(user = request.user)
-		enf = p.enfermedad.select_related()
-		listan = Producto_Enfermedad.objects.filter(recomendable = "si" ,enf = enf)	
-		ctx = {'listan':listan}
-		return render_to_response('home/nutricion.html', ctx, context_instance = RequestContext(request))
-	else:
-		return HttpResponseRedirect('/')
-
-
-
-
+#	p = Persona.objects.get(id = request.user.id)
+#	lista = Producto_Enfermedad.objects.filter(persona__enfermedad = p)
+	return render_to_response('home/nutricion.html', context_instance = RequestContext(request))
 
 def dato_view (request):
 	#form = DatoForm()
@@ -50,20 +41,17 @@ def dato_view (request):
 
 
 def seleccionar_enfermedades_view (request):
-	usu = User.objects.get(pk =request.user.id) 
-	p = Persona.objects.get(user = usu)
+	usuario = Persona.objects.filter(user = request.user)
 	if request.method == "POST":
-		form = sel_enf_form(request.POST,instance= p)
+		form = seleccionar_enfermedades_form(request.POST)
 		if form.is_valid():
 			seleccionada = form.save(commit = False)
-			seleccionada.save()
 			form.save_m2m()
-		#	lista = Persona.objects.filter(enfermedad = enfermedad,persona__user = request.user)
-			ctx = {'form':form}
+			seleccionada.save()
+			ctx = {'form':form, 'now':now}
 			return render_to_response('home/seleccionar_enfermedades.html',ctx,context_instance=RequestContext(request))
 	else:
-		#lista = Persona.objects.filter(enfermedad = enfermedad,persona__user = request.user)		
-		form = sel_enf_form(instance = p)
+		form = seleccionar_enfermedades_form()
 	ctx = {'form':form}
 	return render_to_response('home/seleccionar_enfermedades.html', ctx, context_instance = RequestContext(request))	
 
@@ -76,27 +64,25 @@ def valoraciones_view (request):
 
 
 def register_view(request):
-	form = RegisterForm()
-	now = date.today()
-	if request.method == "POST":
-		form = RegisterForm(request.POST)
-		if form.is_valid():
-			usuario          = form.cleaned_data['username']
-			genero           = form.cleaned_data['genero']
-			fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
-			email            = form.cleaned_data['email']
-			password_one     = form.cleaned_data['password_one']
-			password_two     = form.cleaned_data['password_two']
-			u = User.objects.create_user(username=usuario,email=email,password=password_one)
-			u.save()
-			p = Persona.objects.create(genero=genero,fecha_nacimiento=fecha_nacimiento, user = u)
-			p.save() # Guardar el objeto
+		form = RegisterForm()
+		now = date.today()
+		if request.method == "POST":
+			form = RegisterForm(request.POST)
+			if form.is_valid():
+				usuario          = form.cleaned_data['username']
+				genero           = form.cleaned_data['genero']
+				fecha_nacimiento = form.cleaned_data['fecha_nacimiento']
+				email            = form.cleaned_data['email']
+				password_one     = form.cleaned_data['password_one']
+				password_two     = form.cleaned_data['password_two']
+				u = User.objects.create_user(username=usuario,email=email,password=password_one)
+				u.save()
+				p = Persona.objects.create(genero=genero,fecha_nacimiento=fecha_nacimiento, user = u)
+				p.save() # Guardar el objeto
 			return render_to_response('home/thanks_register.html',context_instance=RequestContext(request))
-	else:
-		ctx = {'form':form, 'now':now}
-		return render_to_response('home/register.html',ctx,context_instance = RequestContext(request))
-	ctx = {'form':form, 'now':now}
-	return render_to_response('home/register.html',ctx,context_instance = RequestContext(request))
+		else:
+			ctx = {'form':form, 'now':now}
+			return render_to_response('home/register.html',ctx,context_instance = RequestContext(request))
 
 
 def index_view (request):

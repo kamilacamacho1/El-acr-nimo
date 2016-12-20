@@ -5,5 +5,12 @@
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button type="submit" > Guardar </button>
-	
+		<input type = "reset" value = "Limpiar"/>
+	</form>
+	<br>
+	{% for i in form %}
+	{{ i.nombre }}	
+	<br>
+{% endfor %}
+
 {% endblock %}

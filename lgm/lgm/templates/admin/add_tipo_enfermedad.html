@@ -5,16 +5,32 @@
 {% endblock %}
 	
 {% block content %}
+
+<div class="container" >
+	<div class="col s12">
+	<br>
+	 	<div class="light-green accent-1" class="col s12 cyan">  
+        	<center><h5 >Agregar Tipo de Enfermedades</h5></center>
+        </div>
+<br>
+<br>
 	<form action="." method = "POST" enctype = "multipart/form-data">
+	<br>
+
 		{% csrf_token %}
 		{{ form.as_p }}
-		<button type="submit" > Guardar </button>
-		<input type = "reset" value = "Limpiar"/>
+		<button type="submit" href="" class="waves-effect light-green accent-2 btn-large "> Guardar </button>
+		<input type = "reset" value = "Limpiar" class="waves-effect light-green accent-2 btn-large "/>
 	</form>
 	<br>
 {% for i in tipos %}
 	{{ i.nombre }}	
-	<a class="btn" href="/del/tipo_enfermedad/{{ i.id }}"> Eliminar</a>
+
+	<center><a class="waves-effect light-green accent-2 btn-large " href="/del/tipo_enfermedad/{{ i.id }}" > Eliminar</a></center>
+	
 	<br>
+	
 {% endfor %}
 {% endblock %}
+
+

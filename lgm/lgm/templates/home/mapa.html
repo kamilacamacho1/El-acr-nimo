@@ -15,10 +15,7 @@
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
 
-
-</head>
-<body>
-
+<div class="container">
 	<div id="mapa" class="capas"></div>
 	<div id="datos" class="capas">
 		<div id="form">
@@ -29,29 +26,11 @@
 				{{ ubicaciones }}
 
 				<p>
-					<input class="btn btn-inverse" type="submit" value="Guardar ubicacion">
+				<center>
+					<input class="waves effect light-green accent-2 btn-large" type="submit" value="Guardar ubicacion">
+				</center>
+					
 				</p>
-
-
- <!-- <select class="browser-default">
-    <option value="" disabled selected>tipo de lugar</option>
-  	{% for ubicacion in ubicaciones %}
-				<option value="{{ ubicacion.nombre }}"> {{ ubicacion.nombre }}</option>
-			{% endfor %}
-  </select>
--->
-
-<!--	</form>
-	
-	<input type = "button" onclick = "Agregar_Marcador()">
-		</div>
-		<!--<div id="data">
-			<ul id="ubicaciones">
-			{% for ubicacion in ubicaciones %}
-				<li>{{ ubicacion.nombre }} {{ ubicacion.tipo_lugar }} - hace {{ ubicacion.fecha|timesince }}</li>
-			{% endfor %}
-			</ul>
-		</div>-->
 	</div>
 
 	<link rel="stylesheet" type="text/css" href="/media/css/excite-bike/jquery-ui-1.10.3.custom.css">
@@ -163,6 +142,9 @@ var marker = new google.maps.Marker({
 
 </script>
 {% endfor %}
+</div>
+
+	
 
 
 {% endblock %}

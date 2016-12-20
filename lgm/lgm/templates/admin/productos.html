@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-  <h1><CENTER><font size="x"color="#01DFA5"="Footlight MT Light">Lista de productos</font></CENTER></h1>
+  <h5><CENTER> Lista de productos</CENTER></h5>
   <br>
   {% if user.is_authenticated %}
 
-  <a class="btn"href="{% url 'vista_agregar_producto' %}">Agregar productos</a>
+  
 
   {% endif %}
   {% if productos %}
@@ -35,9 +35,14 @@
       </tbody>
   {% endfor %}
   </table>
+  <br>
+  <br>
+  <center>
+  <a class="btn"href="{% url 'vista_agregar_producto' %}">Agregar productos</a>
+  </center>
 
   {% else %}
-    <h2>No existen productos registradas </h2>
+    <h2>No hay productos registrados </h2>
   {% endif %}
 
   {% if productos %}
@@ -45,7 +50,7 @@
 
     <div class="paginaton paginaton-centered">
       <ul>
-        <li><a href="/productos/page/1" > << </a></li>
+        <li><a href="/productos/page/1" >  </a></li>
         {% if productos.has_previous %}
         <li><a href="/productos/page/{{ productos.previous_page_number }}"> Anterior </a></li>
         {% else %}
@@ -57,12 +62,12 @@
         {% else %}
           <li><a href="#"> Siguiente </a></li>
         {% endif %}
-          <li><a href="/productos/page/{{ productos.paginator_num_pages }}"> >> </a></li>
+          <li><a href="/productos/page/{{ productos.paginator_num_pages }}">  </a></li>
       </ul>
     </div>  
   </div>
       <br>
-      <h4>Pagina {{ productos.number }} de {{ productos.paginator.num_pages }}</h4>
+      <h6>Pagina {{ productos.number }} de {{ productos.paginator.num_pages }}</h6>
   {% endif %}
   
 {% endblock %}

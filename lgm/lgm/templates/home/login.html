@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block title %} Login {% endblock %}
 {% block content %}
-<div class="container">
+<br>
+<div class="container" style="text-align: right">
 	<div class="row">
 		<div class="col s12">
-			<form action="." method="POST" align="center">
+			<div class="light-green accent-1">  
+				<h5> ¡Bienvenido! Por favor ingrese su usuario y contraseña</h5>
+			</div>
+			<form action="." method="POST" >
 				{% csrf_token %}
 				{{mensage}}
 				{{form.as_p}}
-				<button type="submit" a class="waves-effect green darken-2 btn-large" type="submit"  value="Login"><i class="material-icons left">lock</i>Login </button></a>
+				<button type="submit" a class="waves-effect light-green accent-2 btn-large" type="submit"  value="Login"><i class="material-icons left">lock</i>Login </button></a>
 			</form>
 			<br>
-			<form align = "center">
-				<a href="/registro/"  class="waves-effect green darken-2 btn-large"><i class="material-icons left"> 
-					border_color</i>Registrar</a>
-
+			<form>
+				<a href="/registro/"  class="waves-effect light-green accent-2 btn-large"><i class="material-icons left">border_color</i>Registrar</a>
 			</form>
 		</div>
 	</div>		

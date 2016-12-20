@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}{% endblock %}
+
 {% block content %}
   <body background="#c8e6c9">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -72,30 +73,9 @@
     </ul>
   </div>
 </div>
-  {% if listan %}
 
-<table>
-        <thead>
-          <tr>
-              <th data-field="">Nutricion</th>
-
-        </thead>
-
-        <tbody>
-          {% for t in listan %}
-          <tr>
-            <td>{{t.pro}}</td>
-          </tr>
-          {% endfor %}          
-        </tbody>
-      </table>
-
-{% else %}
-  <center>
-    <h4>
-    En este moento no  posee ninguna  valoracion  agregue una
-    </h4>
-
-  </center>
-{% endif %}
 {% endblock %}
+
+
+
+   

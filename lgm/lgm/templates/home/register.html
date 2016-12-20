@@ -7,13 +7,18 @@
 <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
 <center>
+<br>
+<div class="container">
+  <div class="col s6">
+    <div class="light-green accent-1">
+        <h4>
+         Registrate y conoce más sobre nosotros 
+        </h4>  
+    </div>
+  </div>
+</div>
 	<div class="container">
 		<div class="col s6">
-			<div class="light-green accent-1">
-        	<h4>
-         	Registrate y conoce más sobre nosotros 
-        	</h4>  
-    	</div>
 			<form action="." method = "POST" align="center">
 				
 				{% csrf_token %}
@@ -31,7 +36,7 @@
 				});
 				</script>
 
-				<button type="submit" a class="waves-effect green darken-2 btn-large" ><i class="material-icons left"> 
+				<button type="submit" a class="waves-effect light-green accent-2 btn-large" ><i class="material-icons left"> 
 					border_color</i>Registrar 
 
 				</button></a>
